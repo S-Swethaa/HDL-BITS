@@ -1,0 +1,38 @@
+module fulladder(
+    input a,
+    input b,
+    input ci,
+    output sum1,
+    output carry);
+    
+    wire p,g;
+    assign p=a^b;
+    assign g=a&b;
+    
+    assign sum1=p^ci;
+    assign carry=g|(p&ci);
+endmodule
+
+module top_module( 
+    input [99:0] a, b,
+    input cin,
+    output [99:0] cout,
+    output [99:0] sum );
+    
+    wire [100:0]c;
+    assign c[0]=cin;
+ genvar i;
+    generate
+        for (i = 0; i < 100; i = i + 1) begin : RC
+            fulladder fa_i (
+                .a  (a[i]),
+                .b  (b[i]),
+                .ci (c[i]),
+                .sum1 (sum[i]),
+                .carry (c[i+1]));
+
+            assign cout[i] = c[i+1];
+        end
+    endgenerate
+endmodule
+ 
