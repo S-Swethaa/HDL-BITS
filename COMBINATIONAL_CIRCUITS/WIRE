@@ -1,0 +1,7 @@
+module top_module (
+    input in,
+    output out);
+wire s;
+    assign s=in;
+    assign out=s;
+endmodule
