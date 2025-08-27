@@ -1,0 +1,12 @@
+module top_module (
+    input clk,
+    input d,
+    output q
+);
+reg d_q,d_n;
+    always @(posedge clk)
+        d_q<=d;
+    always @(negedge clk)
+        d_n<=d;
+    assign q=(clk)?d_q:d_n;
+endmodule
